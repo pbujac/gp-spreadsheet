@@ -24,8 +24,10 @@ const commonConfig = merge([
 
 const devMode = {
   mode: 'development',
-  devtool: 'cheap-eval-source-map'
+  devtool: ''
 };
+
+module.exports = devMode;
 
 const prodMode = {
   mode: 'production'

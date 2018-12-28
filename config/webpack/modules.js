@@ -5,7 +5,12 @@ const modules = {
     {
       test: /\.(js|jsx)$/,
       exclude: /node_modules/,
-      use: ['babel-loader']
+      use: [ 'babel-loader' ]
+    },
+    {
+      test: /\.js$/,
+      use: [ 'source-map-loader' ],
+      enforce: 'pre'
     },
     {
       test: /\.css$/,
