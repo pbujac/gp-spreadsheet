@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "set NODE_ENV=development && webpack-dev-server --mode development --open --hot",
-    "build": "rm -rf dist && webpack --mode production",
+    "start": "webpack-dev-server --hot --env.NODE_ENV=development",
+    "build": "webpack -p --env.NODE_ENV=production",
     "preanalyzer": "./node_modules/webpack/bin/webpack.js --profile --json > stats.json",
     "analyzer": "./node_modules/webpack-bundle-analyzer/lib/bin/analyzer.js stats.json"
   },
