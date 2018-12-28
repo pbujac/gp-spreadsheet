@@ -1,0 +1,17 @@
+diff a/config/webpack/optimization.js b/config/webpack/optimization.js	(rejected hunks)
+@@ -7,13 +7,8 @@
+         name: 'vendors',
+         chunks: 'all'
+       },
+-      common: {
+-        test: /[\\/](utils|core|googleMaps|localStorage|analytics|global)[\\/]/,
+-        name: 'common',
+-        chunks: 'initial'
+-      }
+     },
+   }
+ };
+ 
+-module.exports = optimization;
+\ No newline at end of file
++module.exports = optimization;

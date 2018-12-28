@@ -1,0 +1,14 @@
+diff a/package.json b/package.json	(rejected hunks)
+@@ -4,8 +4,10 @@
+   "description": "",
+   "main": "index.js",
+   "scripts": {
+-    "start": "webpack-dev-server --mode development --open --hot",
+-    "build": "webpack --mode production"
++    "start": "set NODE_ENV=development && webpack-dev-server --mode development --open --hot",
++    "build": "rm -rf dist && webpack --mode production",
++    "preanalyzer": "./node_modules/webpack/bin/webpack.js --profile --json > stats.json",
++    "analyzer": "./node_modules/webpack-bundle-analyzer/lib/bin/analyzer.js stats.json"
+   },
+   "keywords": [],
+   "author": "",

@@ -1,18 +1,19 @@
 const optimization = {
-  namedChunks: true,
   splitChunks: {
     cacheGroups: {
-      vendors: {
+      commons: {
         test: /[\\/]node_modules[\\/]/,
-        name: 'vendors',
-        chunks: 'all'
+        name: 'vendor_app',
+        chunks: 'all',
+        minChunks: 6
       },
-      common: {
-        test: /[\\/](utils|core|googleMaps|localStorage|analytics|global)[\\/]/,
-        name: 'common',
-        chunks: 'initial'
+      styles: {
+        name: 'styles',
+        test: /\.css$/,
+        chunks: 'all',
+        enforce: true
       }
-    },
+    }
   }
 };
 

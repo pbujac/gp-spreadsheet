@@ -1,6 +1,7 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
+import CleanWebpackPlugin from 'clean-webpack-plugin';
 import webpack from 'webpack';
 import path from 'path';
 
@@ -9,6 +10,7 @@ const plugins = [
     template: path.join(__dirname, '../../', '/src/index.html')
   }),
   new webpack.optimize.ModuleConcatenationPlugin(),
+  new CleanWebpackPlugin(['dist']),
   new MiniCssExtractPlugin({
     filename: "[name]-[hash].css",
     chunkFilename: "[id][hash].css"
