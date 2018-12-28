@@ -1,9 +1,3 @@
-# Simple React Webpack boilerplate
+# Gov Predict Spreadsheets
 
-A ready to use simple boilerplate for React Apps.
-
-## Instructions
-
-* Clone the repo
-* Run `npm install`
-* Run `npm start`
+Simulation application
