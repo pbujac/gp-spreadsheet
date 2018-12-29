@@ -1,5 +1,11 @@
 {
   "extends": [
     "fbjs"
-  ]
+  ],
+  "rules": {
+    "max-len": [
+      "error",
+      180
+    ]
+  }
 }

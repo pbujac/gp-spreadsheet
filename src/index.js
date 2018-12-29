@@ -1,14 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Loading from './components/Loading';
+import App from './App';
+import Routes from './Routes';
 
-const HomePage = React.lazy(() => import(
-  './components/App' /* webpackChunkName: "homepage" */)
-);
-
-ReactDOM.render(
-  <React.Suspense fallback={<Loading />}>
-    <HomePage />
-  </React.Suspense>
-  , document.getElementById('root')
-);
+ReactDOM.render(<Routes />, document.getElementById('root'));

@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 
-import style from './App.scss';
-
-class App extends Component {
+class Homepage extends Component {
   render() {
     return (
-      <div className={style.app}>
+      <div>
         <h1>My React ddss</h1>
       </div>
     );
   }
 }
 
-export default App;
+export default Homepage;
