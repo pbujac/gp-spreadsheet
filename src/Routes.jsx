@@ -1,17 +1,17 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-const PageLayout = React.lazy(() => import('components/PageLayout/PageLayout' /* webpackChunkName: 'page-layout' */));
-const Homepage = React.lazy(() => import('pages/Homepage/Homepage' /* webpackChunkName: 'homepage' */));
+const PageLayout = lazy(() => import('components/PageLayout/PageLayout' /* webpackChunkName: 'page-layout' */));
+const Homepage = lazy(() => import('pages/Homepage/Homepage' /* webpackChunkName: 'homepage' */));
 
 import Loading from 'components/Loading/Loading';
 
 const Routes = () => (
   <BrowserRouter>
-    <Suspense fallback={Loading}>
+    <Suspense fallback={<Loading />}>
       <PageLayout>
         <Switch>
-          <Route path="/" component={Homepage} />
+          <Route exact path="/" component={Homepage} />
         </Switch>
       </PageLayout>
     </Suspense>
