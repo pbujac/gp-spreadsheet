@@ -1,7 +1,7 @@
-import path from 'path';
+import { PATHS } from './utils';
 
 const entry = {
-  app: path.resolve(__dirname, '../../', 'src/index.js')
+  app: PATHS.app,
 };
 
 module.exports = entry;

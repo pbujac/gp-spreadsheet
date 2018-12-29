@@ -1,7 +1,13 @@
+import { ifProduction } from './utils';
+
 const performance = {
-    hints: 'warning',
-    maxEntrypointSize: 400000,
-    maxAssetSize: 400000
+  ...ifProduction(
+    {
+      hints: 'warning',
+      maxEntrypointSize: 400000,
+      maxAssetSize: 400000,
+    }
+  ),
 };
 
 module.exports = performance;

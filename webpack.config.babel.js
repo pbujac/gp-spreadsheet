@@ -9,8 +9,11 @@ import plugins from './config/webpack/plugins';
 import stats from './config/webpack/stats';
 import performance from './config/webpack/performance';
 
+import { ifProduction, ifNotProduction } from './config/webpack/utils';
+
 const commonConfig = merge([
   {
+    mode: ifProduction('production', 'development'),
     entry,
     output,
     module: modules,
@@ -18,35 +21,24 @@ const commonConfig = merge([
     optimization,
     performance,
     plugins,
-    stats
-  }
+    stats,
+  },
 ]);
-
 const devConfig = {
-  mode: 'development',
-  devtool: '',
+  devtool: 'cheap-source-map',
   watchOptions: {
-    ignored: /node_modules/
+    ignored: /node_modules/,
   },
   devServer: {
-    port: 4000,
-    hot: true,
-    inline: true,
+    port: process.env.PORT || 9000,
     progress: true,
     stats: {
-      colors: true,
       modules: false,
-      children: false
-    }
-  }
+      children: false,
+      chunkModules: false,
+    },
+  },
 };
-
-const prodConfig = {
-  mode: 'production',
-};
-
 
 module.exports = devConfig;
-module.exports = prodConfig;
-export const PROD_ENV = 'production';
-module.exports = env => merge(commonConfig, env.production === PROD_ENV ? prodConfig : devConfig);
+module.exports = merge(commonConfig, ifNotProduction(devConfig));

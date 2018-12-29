@@ -1,9 +1,9 @@
-import path from 'path';
+import { PATHS, ifProduction } from './utils';
 
 const output = {
-  path: path.join(__dirname, '../../', '/dist'),
-  filename: '[name].[hash].bundle.js',
-  chunkFilename:'[name].[hash].chunk.js',
+  path: PATHS.build,
+  filename: ifProduction('[id].[contenthash].js', '[name].bundle.js'),
+  chunkFilename: ifProduction('[id].[contenthash].js', '[name].chunk.js'),
 };
 
 module.exports = output;

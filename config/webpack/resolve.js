@@ -1,9 +1,9 @@
-import path from 'path';
+import { PATHS } from './utils';
 
 const resolve = {
-  extensions: [ '*', '.js', '.jsx' ],
-  modules: [ path.join(__dirname, '../../', '/src/'), 'node_modules' ],
-  alias: {}
+  extensions: ['.js', '.jsx'],
+  modules: [PATHS.root, 'node_modules'],
+  alias: {},
 };
 
 module.exports = resolve;

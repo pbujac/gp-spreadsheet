@@ -1,36 +1,43 @@
-import path from 'path';
+import autoprefixer from 'autoprefixer';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
+import { removeEmpty } from 'webpack-config-utils';
+import { PATHS, ifNotProduction, ifProduction } from './utils';
+
 const modules = {
-  rules: [
+  rules: removeEmpty([
+    ifNotProduction({
+      enforce: 'pre',
+      test: /\.(js|jsx)$/,
+      exclude: /node_modules/,
+      loader: 'eslint-loader',
+    }),
     {
       test: /\.(js|jsx)$/,
       exclude: /node_modules/,
-      use: [ 'babel-loader' ]
-    },
-    {
-      test: /\.js$/,
-      use: [ 'source-map-loader' ],
-      enforce: 'pre'
+      use: ['babel-loader'],
     },
     {
       test: /\.s?css$/,
       use: [
-        {
-          // loader: MiniCssExtractPlugin.loader // prod
-          loader: 'style-loader'
-        },
+        ifProduction(MiniCssExtractPlugin.loader, 'style-loader'),
         {
           loader: 'css-loader',
           options: {
             modules: true,
-            sourceMap: true,
-            localIdentName: '[sha1:hash:hex:4]'
-          }
+            ...ifProduction({ sourceMap: true }),
+            importLoaders: 1,
+            localIdentName: '[sha1:hash:hex:4]',
+          },
         },
         {
-          loader: 'sass-loader'
-        }]
+          loader: 'postcss-loader',
+          options: {
+            plugins: [autoprefixer],
+          },
+        },
+        'sass-loader',
+      ],
     },
     {
       test: /\.(png|jpg|gif|svg)$/,
@@ -38,7 +45,7 @@ const modules = {
         {
           loader: 'file-loader',
           options: {
-            outputPath: path.join(__dirname, '../../', 'src/assets/images'),
+            outputPath: PATHS.images,
           },
         },
       ],
@@ -49,12 +56,12 @@ const modules = {
         {
           loader: 'file-loader',
           options: {
-            outputPath: path.join(__dirname, '../../', 'src/assets/fonts'),
+            outputPath: PATHS.fonts,
           },
         },
       ],
     },
-  ],
+  ]),
 };
 
 module.exports = modules;

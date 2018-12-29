@@ -1,5 +1,7 @@
 const stats = {
-  colors: true
+  colors: true,
+  modules: false,
+  children: false,
 };
 
 module.exports = stats;
