@@ -1,6 +1,7 @@
 # Node Modules
 /node_modules
 
-# Distribution 
-/dist
+# Distribution
+/dist/*
+/coverage/*
 .idea/*

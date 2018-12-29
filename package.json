@@ -4,26 +4,37 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV=development webpack-dev-server --hot --inline -w --mode=development",
-    "build": "NODE_ENV=production webpack -p --mode=production"
+    "start": "NODE_ENV=development webpack-dev-server --hot --inline -w --mode=development --open",
+    "build": "NODE_ENV=production webpack -p --mode=production",
+    "test": "jest --coverage"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "dependencies": {
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.2.2",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/preset-env": "^7.2.3",
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.0.0",
+    "@types/jest": "^23.3.10",
     "autoprefixer": "^9.4.3",
+    "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": " ^9.0.0",
+    "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.4",
     "clean-webpack-plugin": "^1.0.0",
     "compression-webpack-plugin": "^2.0.0",
     "css-loader": "^2.1.0",
     "cssnano": "^4.1.8",
     "dotenv": "^6.2.0",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.7.1",
+    "enzyme-to-json": "^3.3.5",
     "eslint": "^5.11.1",
     "eslint-config-fbjs": "^2.1.0",
     "eslint-loader": "^2.1.1",
@@ -35,6 +46,8 @@
     "eslint-plugin-relay": "^0.0.8",
     "html-webpack-include-assets-plugin": "^1.0.6",
     "html-webpack-plugin": "^3.2.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^23.6.0",
     "mini-css-extract-plugin": "^0.5.0",
     "node-sass": "^4.11.0",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
@@ -44,6 +57,7 @@
     "postcss-plugin": "^1.0.0",
     "postcss-preset-env": "^6.5.0",
     "react-css-modules": "^4.7.8",
+    "regenerator-runtime": "^0.13.1",
     "sass-lint": "^1.12.1",
     "sass-lint-webpack": "^1.0.0",
     "sass-loader": "^7.1.0",
@@ -57,9 +71,5 @@
     "webpack-config-utils": "^2.3.1",
     "webpack-dev-server": "^3.1.9",
     "webpack-merge": "^4.1.5"
-  },
-  "dependencies": {
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0"
   }
 }
