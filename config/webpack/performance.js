@@ -1,5 +1,7 @@
 const performance = {
-    hints: 'warning'
+    hints: 'warning',
+    maxEntrypointSize: 400000,
+    maxAssetSize: 400000
 };
 
 module.exports = performance;

@@ -1,4 +1,5 @@
 import path from 'path';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 const modules = {
   rules: [
@@ -13,9 +14,23 @@ const modules = {
       enforce: 'pre'
     },
     {
-      test: /\.css$/,
-      exclude: /node_modules/,
-      use: [ 'style-loader', 'css-loader' ]
+      test: /\.s?css$/,
+      use: [
+        {
+          // loader: MiniCssExtractPlugin.loader // prod
+          loader: 'style-loader'
+        },
+        {
+          loader: 'css-loader',
+          options: {
+            modules: true,
+            sourceMap: true,
+            localIdentName: '[sha1:hash:hex:4]'
+          }
+        },
+        {
+          loader: 'sass-loader'
+        }]
     },
     {
       test: /\.(png|jpg|gif|svg)$/,

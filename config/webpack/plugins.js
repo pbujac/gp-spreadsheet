@@ -1,36 +1,41 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import CleanWebpackPlugin from 'clean-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
-import CleanWebpackPlugin from 'clean-webpack-plugin';
+import OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin';
 import webpack from 'webpack';
 import path from 'path';
-import { PROD_ENV } from '../../webpack.config.babel';
+import CompressionPlugin from 'compression-webpack-plugin';
 
-const defaultPlugins = [
+const plugins = [
   new HtmlWebpackPlugin({
-    template: path.join(__dirname, '../../', '/src/index.html')
+    template: path.join(__dirname, '../../', '/src/index.html'),
+    assets: ['[name].css'],
+    minify: true
   }),
   new webpack.optimize.ModuleConcatenationPlugin(),
-  new CleanWebpackPlugin([ 'dist' ])
-];
+  new CleanWebpackPlugin([ 'dist' ],  {
+    root: path.resolve(__dirname, '../../'),
+    verbose: true
+  }),
+  new webpack.HashedModuleIdsPlugin(),
+  new UglifyJsPlugin({
+    parallel: true,
+    cache: true,
+    uglifyOptions: {
+      output: {
+        comments: false
+      },
 
-const devPlugins = [
-  ...defaultPlugins,
-  new webpack.DefinePlugin({
-    __ENV__: JSON.stringify(process.env.NODE_ENV || 'development')
+    }
+  }),
+  new MiniCssExtractPlugin({
+    filename: '[name].[hash].css',
+    chunkFilename: '[name].[hash].css'
+  }),
+  new OptimizeCSSAssetsPlugin(),
+  new CompressionPlugin({
+    algorithm: 'gzip'
   })
 ];
-
-const prodPlugins = [
-  ...defaultPlugins,
-  new MiniCssExtractPlugin({
-    filename: '[name]-[hash].css',
-    chunkFilename: '[id][hash].css'
-  }),
-  new UglifyJsPlugin({
-    cache: true,
-    parallel: true
-  }),
-];
-
-module.exports = (env) => env.production === PROD_ENV ? prodPlugins : devPlugins;
+module.exports = plugins;

@@ -2,9 +2,8 @@ import path from 'path';
 
 const output = {
   path: path.join(__dirname, '../../', '/dist'),
-  filename: '[name].bundle.js',
-  chunkFilename:'[name].chunk.js',
-  publicPath:'/'
+  filename: '[name].[hash].bundle.js',
+  chunkFilename:'[name].[hash].chunk.js',
 };
 
 module.exports = output;

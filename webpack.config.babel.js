@@ -1,5 +1,4 @@
 import merge from 'webpack-merge';
-import path from 'path';
 
 import entry from './config/webpack/entry';
 import output from './config/webpack/output';
@@ -26,11 +25,19 @@ const commonConfig = merge([
 const devConfig = {
   mode: 'development',
   devtool: '',
+  watchOptions: {
+    ignored: /node_modules/
+  },
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
-    compress: true,
     port: 4000,
-    overlay: true
+    hot: true,
+    inline: true,
+    progress: true,
+    stats: {
+      colors: true,
+      modules: false,
+      children: false
+    }
   }
 };
 
@@ -38,5 +45,8 @@ const prodConfig = {
   mode: 'production',
 };
 
+
+module.exports = devConfig;
+module.exports = prodConfig;
 export const PROD_ENV = 'production';
 module.exports = env => merge(commonConfig, env.production === PROD_ENV ? prodConfig : devConfig);
