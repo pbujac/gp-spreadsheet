@@ -1,4 +1,5 @@
 import autoprefixer from 'autoprefixer';
+import postCSSmodulesValues from 'postcss-modules-values';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 import { removeEmpty } from 'webpack-config-utils';
@@ -25,7 +26,7 @@ const modules = {
           loader: 'css-loader',
           options: {
             modules: true,
-            ...ifProduction({ sourceMap: true }),
+            ...ifNotProduction({ sourceMap: true }),
             importLoaders: 1,
             localIdentName: '[sha1:hash:hex:4]',
           },
@@ -33,7 +34,10 @@ const modules = {
         {
           loader: 'postcss-loader',
           options: {
-            plugins: [autoprefixer],
+            plugins: [
+              autoprefixer,
+              postCSSmodulesValues,
+            ],
           },
         },
         'sass-loader',
@@ -44,9 +48,6 @@ const modules = {
       use: [
         {
           loader: 'file-loader',
-          options: {
-            outputPath: PATHS.images,
-          },
         },
       ],
     },

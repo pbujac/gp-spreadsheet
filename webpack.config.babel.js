@@ -32,6 +32,7 @@ const devConfig = {
   devServer: {
     port: process.env.PORT || 9000,
     progress: true,
+    historyApiFallback: true,
     stats: {
       modules: false,
       children: false,

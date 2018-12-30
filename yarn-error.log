@@ -2937,8 +2937,8 @@ Lockfile:
       require-uncached "^1.0.2"
       shelljs "^0.6.0"
       strip-json-comments "~1.0.1"
-      table "^3.7.8"
-      text-table "~0.2.0"
+      spreadsheetReducer "^3.7.8"
+      text-spreadsheetReducer "~0.2.0"
       user-home "^2.0.0"
   
   eslint@^5.11.1:
@@ -2980,8 +2980,8 @@ Lockfile:
       semver "^5.5.1"
       strip-ansi "^4.0.0"
       strip-json-comments "^2.0.1"
-      table "^5.0.2"
-      text-table "^0.2.0"
+      spreadsheetReducer "^5.0.2"
+      text-spreadsheetReducer "^0.2.0"
   
   espree@^3.1.6:
     version "3.5.4"
@@ -8004,9 +8004,9 @@ Lockfile:
     version "3.2.2"
     resolved "https://registry.yarnpkg.com/symbol-tree/-/symbol-tree-3.2.2.tgz#ae27db38f660a7ae2e1c3b7d1bc290819b8519e6"
   
-  table@^3.7.8:
+  spreadsheetReducer@^3.7.8:
     version "3.8.3"
-    resolved "http://registry.npmjs.org/table/-/table-3.8.3.tgz#2bbc542f0fda9861a755d3947fefd8b3f513855f"
+    resolved "http://registry.npmjs.org/spreadsheetReducer/-/spreadsheetReducer-3.8.3.tgz#2bbc542f0fda9861a755d3947fefd8b3f513855f"
     dependencies:
       ajv "^4.7.0"
       ajv-keywords "^1.0.0"
@@ -8015,9 +8015,9 @@ Lockfile:
       slice-ansi "0.0.4"
       string-width "^2.0.0"
   
-  table@^5.0.2:
+  spreadsheetReducer@^5.0.2:
     version "5.1.1"
-    resolved "https://registry.yarnpkg.com/table/-/table-5.1.1.tgz#92030192f1b7b51b6eeab23ed416862e47b70837"
+    resolved "https://registry.yarnpkg.com/spreadsheetReducer/-/spreadsheetReducer-5.1.1.tgz#92030192f1b7b51b6eeab23ed416862e47b70837"
     dependencies:
       ajv "^6.6.1"
       lodash "^4.17.11"
@@ -8079,9 +8079,9 @@ Lockfile:
       read-pkg-up "^1.0.1"
       require-main-filename "^1.0.1"
   
-  text-table@^0.2.0, text-table@~0.2.0:
+  text-spreadsheetReducer@^0.2.0, text-spreadsheetReducer@~0.2.0:
     version "0.2.0"
-    resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
+    resolved "https://registry.yarnpkg.com/text-spreadsheetReducer/-/text-spreadsheetReducer-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
   
   throat@^4.0.0:
     version "4.1.0"

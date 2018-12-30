@@ -1,0 +1,52 @@
+@import '~style/variables';
+
+@keyframes modalFade {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  overflow: auto;
+  margin: 0 auto;
+  z-index: 1;
+  color: $black;
+  background-color: $black-transparent;
+
+  .content {
+    font-size: medium;
+    opacity: 1;
+    padding: $base-space * 2;
+    margin: 10% auto 0;
+    width: 50%;
+    background-color: $white;
+    border-radius: $base-border-radius * 4;
+    animation-name: modalFade;
+    animation-duration: 0.3s;
+  }
+
+  .header {
+    display: flex;
+    width: 100%;
+    align-items: flex-start;
+    justify-content: space-between;
+    border-bottom: 1px solid;
+  }
+
+  .subtitle {
+    text-transform: uppercase;
+  }
+
+  .children {
+    padding: $base-space;
+  }
+}

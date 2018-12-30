@@ -1,0 +1,28 @@
+@import '~style/variables';
+
+$btn-padding: $base-space $base-space * 2;
+
+.primary {
+  background-color: $black;
+  color: $white;
+  padding: $btn-padding;
+}
+
+.secondary {
+  background-color: $white;
+  color: $black;
+  padding: $btn-padding;
+  border: $base-border;
+}
+
+.primary_full {
+  @extend .primary;
+
+  width: 100%;
+}
+
+.secondary_full {
+  @extend .secondary;
+
+  width: 100%;
+}

@@ -2,10 +2,15 @@
   "extends": [
     "fbjs"
   ],
+  "plugins": [
+    "react-hooks"
+  ],
   "rules": {
     "max-len": [
       "error",
       180
-    ]
+    ],
+    "react-hooks/rules-of-hooks": "error",
+    "react/react-in-jsx-scope": "false"
   }
 }

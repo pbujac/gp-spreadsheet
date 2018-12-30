@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import table from './table';
+import spreadsheetReducer from './spreadsheet.reducer';
 
 const rootReducer = combineReducers({
-  table,
+  spreadsheet: spreadsheetReducer,
 });
 
 export default rootReducer;

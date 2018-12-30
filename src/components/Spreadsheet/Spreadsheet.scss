@@ -1,0 +1,11 @@
+.spreadsheet {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+
+  .card {
+    width: 50%;
+    text-align: left;
+  }
+}

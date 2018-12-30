@@ -1,0 +1,27 @@
+@import '~style/variables';
+
+.card {
+  text-align: center;
+  padding: $base-space * 10 $base-space * 4;
+  border-radius: $base-border-radius * 8;
+  box-shadow: $base-shadow;
+  height: inherit;
+
+  .title {
+    font-weight: 700;
+  }
+
+  .description {
+    font-weight: 600;
+  }
+}
+
+.black {
+  background: $black;
+  color: $white;
+}
+
+.blue {
+  background: $blue;
+  color: $white;
+}
