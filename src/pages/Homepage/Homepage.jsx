@@ -21,7 +21,6 @@ const Homepage = () => {
           theme="black"
         />
       </Link>
-
     </div>
   );
 };

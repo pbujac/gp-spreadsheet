@@ -6,6 +6,7 @@ import useForm from 'components/Form/Form';
 import Select from 'components/Form/Select';
 
 import { validateTitle } from '../../utils/validations/validationRules';
+
 import style from './AddColumnForm.scss';
 
 const initialState = { title: '' };
@@ -13,18 +14,19 @@ const validationRules = ({ title }) => ({
   title: validateTitle(title),
 });
 
-const AddColumnForm = ({ columns }) => {
+const AddColumnForm = ({ columns, onSaveNewSpreadsheet }) => {
+
   const { form, errors, onChange } = useForm({
     initialState,
     validation: validationRules,
   });
 
-  const hasErrors = errors && errors.title;
   const onFormSubmit = (event) => {
-    console.log(form);
     event.preventDefault();
+    onSaveNewSpreadsheet(form);
   };
 
+  const hasErrors = errors && errors.title;
   return (
     <form onSubmit={onFormSubmit}>
       <Input
