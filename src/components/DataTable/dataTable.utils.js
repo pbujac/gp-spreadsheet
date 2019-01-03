@@ -7,9 +7,9 @@ export const CUSTOM_TYPE = 'custom';
 
 const validateDateCell = (value) => {
   /** TODO: To extend validation rule */
-  const parsedDate = Date.parse(value);
+  const dateRegex = /(0[1-9]|[12][0-9]|3[01])[-\s\/\.](0[1-9]|1[012])[-\s\/\.](19|20)\d\d/;
 
-  return isNaN(value) && !isNaN(parsedDate);
+  return dateRegex.test(value);
 };
 
 const validateStringCell = (value, cell) => typeof value === 'string' || value instanceof String;

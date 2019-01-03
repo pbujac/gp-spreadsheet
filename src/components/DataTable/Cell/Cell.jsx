@@ -22,18 +22,17 @@ const Cell = ({rowNumber, columnNumber, cell, updateTableData, onValidateField }
   }, []);
 
   const onDoubleClick = () => setIsEditing(true);
-  const onBlur = () => {
-    updateTableData(value, cell.type, rowNumber, columnNumber);
+  const onBlur = (event) => onCellLeave(event);
+
+  const onKeyDownInput = (event) => event.keyCode === ENTER_KEY && onCellLeave(event);
+
+  const onCellLeave = (event) => {
+    updateTableData(event.target.value, cell.type, rowNumber, columnNumber);
+
     setIsEditing(false);
 
     setIsValidRequired(isRequired(cell));
-    setIsValid(onValidateField(value, cell.type, cell));
-  };
-
-  const onKeyDownInput = (event) => {
-    if (event.keyCode === ENTER_KEY) {
-      setIsEditing(!isEditing);
-    }
+    setIsValid(onValidateField(event.target.value, cell.type, cell));
   };
 
   const onCellChange = (event) => setValue(event.target.value);
@@ -49,6 +48,7 @@ const Cell = ({rowNumber, columnNumber, cell, updateTableData, onValidateField }
           type="text"
           list={uniqueID}
           onChange={onCellChange}
+          onKeyDown={onKeyDownInput}
           onBlur={onBlur}
           value={cell.value}
           autoFocus
