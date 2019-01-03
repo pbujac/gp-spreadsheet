@@ -17,7 +17,7 @@ Make sure you have installed
 * NPM
 * Yarn - optional
 
-###Dev Mode
+### Dev Mode
 Open project and run in terminal:
 
 - Default PORT used - 9000;
@@ -44,7 +44,7 @@ devConfig: {
 }
 ```
 
-###Prod Mode
+### Prod Mode
 Open project and run in terminal:
 
 ```
@@ -57,7 +57,7 @@ yarn install
 yarn build
 ```
 
-###Implemented Features
+### Implemented Features
 
 * Homepage with Spreadsheet Creation 
 * Basic Routing
@@ -68,7 +68,7 @@ yarn build
 * Highlight of invalid cell and error message display
 * Highlight edited cell
 
-##Screenshots
+## Screenshots
 
 ![Main page](screenshots/homepage.png?raw=true "Main page")
 
