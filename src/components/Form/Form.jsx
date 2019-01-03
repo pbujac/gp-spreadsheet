@@ -5,7 +5,7 @@ export const CUSTOM_LIST_NAME = 'customList';
 
 const useFrom = ({ initialState, validation }) => {
   const [state, setState] = useState(initialState);
-  let errors = {};
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     if (state.type === CUSTOM_TYPE) {
@@ -27,16 +27,34 @@ const useFrom = ({ initialState, validation }) => {
     const name = target.name;
 
     setState(prevState => ({ ...prevState, [name]: value }));
+
+    validateField([name], value );
   };
 
-  if (validation) {
-    errors = validation(state);
-  }
+  const validateForm = () => {
+    if (validation) {
+      const formErrors = validation(state);
+      setErrors(formErrors);
+
+      return formErrors;
+    }
+
+    return errors;
+  };
+
+  const validateField = (name, value) => {
+    if (validation) {
+      errors[name] = validation({ [name]: value })[name];
+      setErrors(errors);
+    }
+  };
 
   return {
     form: state,
     errors,
     onChange,
+    validateField,
+    validateForm,
   };
 };
 

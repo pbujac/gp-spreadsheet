@@ -6,6 +6,7 @@ const Input = ({
   name,
   type,
   value = '',
+  labelName,
   placeholder,
   onChange,
   onBlur,
@@ -16,9 +17,9 @@ const Input = ({
 }) => {
   return (
     <>
-      {name &&
+      {(labelName || name) &&
         <label htmlFor={id}>
-          {name}
+          {labelName || name}
         </label>
       }
 

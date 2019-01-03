@@ -34,14 +34,14 @@ const useDataTable = ({rows, columns}) => {
     const newRowCells = { cells: [] };
 
     columns.forEach((col) => newRowCells.cells.push(getInitColumnName(col)));
-    console.log(newRowCells);
+
     rowData.unshift(newRowCells);
     setRowData(rowData);
   };
 
   const updateTableData = (value, type, rowNumber, columnNumber) => {
-    const isValid = applyColumnValidationRules(value, type);
     const currentCellData = rowData[rowNumber].cells[columnNumber];
+    const isValid = applyColumnValidationRules(value, type, currentCellData);
 
     currentCellData.value = value;
     currentCellData.isValid = isValid;
@@ -55,7 +55,7 @@ const useDataTable = ({rows, columns}) => {
   const addNewRow = () => {
     const allRows = [];
     for (let i = 0; i < INIT_NR_ROWS; i++) {
-      const newRowCells = {cells: []};
+      const newRowCells = { cells: [] };
 
       for (let y = 0; y < columnLength; y++) {
         const columnType = rowData[rowLength - 1].cells[y];

@@ -11,3 +11,9 @@ export const validateCustomList = (customList, errorMessage) => (
     ? errorMessage || 'Custom list must be required'
     : false
 );
+
+export const validateSelect = (value, errorMessage) => (
+  isEmpty(value)
+    ? errorMessage || 'Select value must be required'
+    : false
+);

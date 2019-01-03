@@ -5,20 +5,27 @@ import Button from 'components/Button/Button';
 import useForm, { CUSTOM_LIST_NAME } from 'components/Form/Form';
 import Select from 'components/Form/Select';
 
-import { validateTitle } from '../../utils/validations/validationRules';
-
 import style from './AddColumnForm.scss';
-import { validateCustomList } from 'utils/validations/validationRules';
+import { validateTitle, validateCustomList, validateSelect } from 'utils/validations/validationRules';
 
-const initialState = {title: ''};
-const validationRules = ({title, [CUSTOM_LIST_NAME]: customValue}) => ({
+const initialState = {
+  title: '',
+  type: '',
+  isRequired: false,
+};
+
+const validationRules = ({ title, [CUSTOM_LIST_NAME]: customValue, type }) => ({
   title: validateTitle(title),
   [CUSTOM_LIST_NAME]: validateCustomList(customValue),
+  type: validateSelect(type),
 });
 
-const AddColumnForm = ({columns, onSaveNewColumn}) => {
+const hasFormErrors = (data) => (
+  data && (data.title || data[CUSTOM_LIST_NAME] || data.type)
+);
 
-  const {form, errors, onChange} = useForm({
+const AddColumnForm = ({columns, onSaveNewColumn}) => {
+  const { form, errors, onChange, validateForm } = useForm({
     initialState,
     validation: validationRules,
   });
@@ -26,14 +33,15 @@ const AddColumnForm = ({columns, onSaveNewColumn}) => {
   const onFormSubmit = (event) => {
     event.preventDefault();
 
-    if (form[CUSTOM_LIST_NAME]) {
-      form[CUSTOM_LIST_NAME] = form[CUSTOM_LIST_NAME].split(',').map(item => item && item.trim());
-    }
+    if (!hasFormErrors(validateForm())) {
+      if (form[CUSTOM_LIST_NAME]) {
+        form[CUSTOM_LIST_NAME] = form[CUSTOM_LIST_NAME].split(',');
+      }
 
-    onSaveNewColumn(form);
+      onSaveNewColumn(form);
+    }
   };
 
-  const hasErrors = errors && (errors.title || errors[CUSTOM_LIST_NAME]);
   const CustomSelectType = typeof form[CUSTOM_LIST_NAME] !== 'undefined' && (
     <div>
       {
@@ -56,6 +64,7 @@ const AddColumnForm = ({columns, onSaveNewColumn}) => {
         id="title"
         name="title"
         type="text"
+        labelName="Title"
         placeholder="Insert your title"
         value={form.title}
         errors={errors}
@@ -65,6 +74,7 @@ const AddColumnForm = ({columns, onSaveNewColumn}) => {
       <Select
         id="type"
         name="type"
+        labelName="Type column"
         placeholder="Select your type"
         options={columns}
         value={form.type}
@@ -74,12 +84,23 @@ const AddColumnForm = ({columns, onSaveNewColumn}) => {
         onChange={onChange}
       />
 
+      <Input
+        id="colRequired"
+        labelName="Is required"
+        name="isRequired"
+        type="checkbox"
+        value={form.isRequired}
+        errors={errors}
+        onChange={onChange}
+      />
+
       {CustomSelectType}
 
       <Button
         customStyle={style.submit}
-        type="submit" theme="secondary_full"
-        disabled={hasErrors}>
+        type="submit"
+        theme="secondary_full"
+        disabled={hasFormErrors(errors)}>
         Submit
       </Button>
     </form>

@@ -1,10 +1,10 @@
 import React from 'react';
 import FieldError from 'components/Form/FieldError';
 
-const Select = ({ id, name, options, placeholder, optionValueName = '', optionFieldName = name, onChange, errors }) => {
+const Select = ({ id, name, labelName,  options, placeholder, optionValueName = '', optionFieldName = name, onChange, errors }) => {
   return (
     <>
-      <label htmlFor={id}>{name}</label>
+      <label htmlFor={id}>{labelName || name}</label>
       <select
         id={id}
         name={name}
