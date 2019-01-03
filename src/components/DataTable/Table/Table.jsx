@@ -1,13 +1,15 @@
 import React from 'react';
 
-import Row from 'components/DataTable/Row';
-import useDataTable from 'components/DataTable/DataTable';
-import { uniqueId } from 'utils/utils';
+import Row from 'components/DataTable/Row/Row';
 import Modal from 'components/Modal/Modal';
-import AddColumnForm from 'components/Spreadsheet/AddColumnForm';
+import AddColumnForm from 'components/Spreadsheet/AddColumnForm/AddColumnForm';
 import Button from 'components/Button/Button';
+import useDataTable from 'components/DataTable/DataTable';
+
+import { uniqueId } from 'utils/utils';
 
 import style from './Table.scss';
+
 
 const Table = ({ data }) => {
   const {

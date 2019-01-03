@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { CUSTOM_TYPE } from 'components/DataTable/dataTable.utils';
 
-export const CUSTOM_LIST_NAME = 'customList';
+import { CUSTOM_TYPE } from 'components/DataTable/dataTable.utils';
+import { CUSTOM_LIST_NAME } from 'components/Form/form.utils';
 
 const useFrom = ({ initialState, validation }) => {
   const [state, setState] = useState(initialState);

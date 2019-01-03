@@ -5,7 +5,7 @@ import {SpreadsheetDispatch, SpreadsheetState} from 'utils/constants';
 
 const PageLayout = lazy(() => import('components/PageLayout/PageLayout' /* webpackChunkName: 'page-layout' */));
 const Homepage = lazy(() => import('pages/Homepage/Homepage' /* webpackChunkName: 'homepage' */));
-const SpreadsheetPage = lazy(() => import('pages/SpreadsheetPage/SpreadsheetPage' /* webpackChunkName: 'spreadsheet-page' */));
+const AddNewSpreadsheetPage = lazy(() => import('pages/SpreadsheetPage/AddNewSpreadsheetPage' /* webpackChunkName: 'spreadsheet-page' */));
 const EditSpreadsheetPage = lazy(() => import('pages/SpreadsheetPage/EditSpreadsheetPage' /* webpackChunkName: 'edit-spreadsheet-page' */));
 
 import Loading from 'components/Loading/Loading';
@@ -22,7 +22,7 @@ const Routes = () => {
             <Route exact path="/" component={Homepage} />
             <SpreadsheetDispatch.Provider value={dispatch}>
               <SpreadsheetState.Provider value={state}>
-                <Route exact path="/create-spreadsheet" component={SpreadsheetPage} />
+                <Route exact path="/create-spreadsheet" component={AddNewSpreadsheetPage} />
                 <Route path="/edit-spreadsheet" component={EditSpreadsheetPage} />
               </SpreadsheetState.Provider>
             </SpreadsheetDispatch.Provider>

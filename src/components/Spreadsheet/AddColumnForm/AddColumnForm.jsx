@@ -1,12 +1,17 @@
 import React from 'react';
 
 import Input from 'components/Form/Input';
-import Button from 'components/Button/Button';
-import useForm, { CUSTOM_LIST_NAME } from 'components/Form/Form';
 import Select from 'components/Form/Select';
+import Button from 'components/Button/Button';
+import useForm from 'components/Form/Form';
+
+import { CUSTOM_LIST_NAME } from 'components/Form/form.utils';
+import {
+  validateCustomList, validateSelect,
+  validateTitle,
+} from 'utils/validations/validationRules';
 
 import style from './AddColumnForm.scss';
-import { validateTitle, validateCustomList, validateSelect } from 'utils/validations/validationRules';
 
 const initialState = {
   title: '',
@@ -20,9 +25,7 @@ const validationRules = ({ title, [CUSTOM_LIST_NAME]: customValue, type }) => ({
   type: validateSelect(type),
 });
 
-const hasFormErrors = (data) => (
-  data && (data.title || data[CUSTOM_LIST_NAME] || data.type)
-);
+const hasFormErrors = (data) => data && (data.title || data[CUSTOM_LIST_NAME] || data.type);
 
 const AddColumnForm = ({columns, onSaveNewColumn}) => {
   const { form, errors, onChange, validateForm } = useForm({

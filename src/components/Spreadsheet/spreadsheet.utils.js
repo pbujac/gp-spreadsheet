@@ -1,6 +1,6 @@
 import { uniqueId } from 'utils/utils';
 import { CUSTOM_TYPE } from 'components/DataTable/dataTable.utils';
-import { CUSTOM_LIST_NAME } from 'components/Form/Form';
+import { CUSTOM_LIST_NAME } from 'components/Form/form.utils';
 
 export const INIT_NR_ROWS = 10;
 export const defineNewSpreadsheetData = (form) => {

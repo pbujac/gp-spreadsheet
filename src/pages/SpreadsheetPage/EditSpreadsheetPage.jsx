@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 
-import EditSpreadsheet from 'components/Spreadsheet/EditSpreadsheet';
+import EditSpreadsheet from 'components/Spreadsheet/Edit/EditSpreadsheet';
+
 import { SpreadsheetDispatch, SpreadsheetState } from 'utils/constants';
 import { fetchSpreadsheetById } from 'actions/spreadsheet.actions';
 

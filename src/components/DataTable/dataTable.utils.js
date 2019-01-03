@@ -1,4 +1,4 @@
-import { CUSTOM_LIST_NAME } from 'components/Form/Form';
+import { CUSTOM_LIST_NAME } from 'components/Form/form.utils';
 
 const DATE_TYPE = 'date';
 const STRING_TYPE = 'string';

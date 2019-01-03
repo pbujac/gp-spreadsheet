@@ -1,5 +1,6 @@
 import React from 'react';
-import FieldError from 'components/Form/FieldError';
+
+import FieldError from 'components/Form/FieldError/FieldError';
 
 const Input = ({
   id,

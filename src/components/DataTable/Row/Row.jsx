@@ -1,6 +1,7 @@
 import React from 'react';
 
-import Cell from 'components/DataTable/Cell';
+import Cell from 'components/DataTable/Cell/Cell';
+
 import { uniqueId } from 'utils/utils';
 
 const Row = ({rowNumber, cells, activeCell, updateTableData, onValidateField }) => (

@@ -1,18 +1,17 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 
-import { SpreadsheetDispatch, SpreadsheetState } from 'utils/constants';
-import { defineNewSpreadsheetData } from 'components/Spreadsheet/spreadsheet.utils';
+import { SpreadsheetDispatch, SpreadsheetState } from '../../utils/constants';
+import { defineNewSpreadsheetData } from '../../components/Spreadsheet/spreadsheet.utils';
 
-import Card from 'components/Card/Card';
-import AddColumnForm from 'components/Spreadsheet/AddColumnForm';
+import Card from '../../components/Card/Card';
+import AddColumnForm from '../../components/Spreadsheet/AddColumnForm/AddColumnForm';
 
-import { getAllColumnTypes, saveNewSpreadsheet } from 'actions/spreadsheet.actions';
+import { getAllColumnTypes, saveNewSpreadsheet } from '../../redux/actions/spreadsheet.actions';
 
-import style from './Spreadsheet.scss';
+import style from './AddNewSpreadsheetPage.scss';
 
-
-const Spreadsheet = () => {
+const AddNewSpreadsheetPage = () => {
   const spreadsheet = useContext(SpreadsheetState);
   const dispatch = useContext(SpreadsheetDispatch);
 
@@ -30,10 +29,12 @@ const Spreadsheet = () => {
 
   if (isRedirect) {
     const pathname = '/edit-spreadsheet';
-    return <Redirect to={{
-      pathname,
-      state: { id: data.id },
-    }} />;
+    return (
+      <Redirect to={{
+        pathname,
+        state: { id: data.id },
+      }} />
+    );
   }
   return (
     <div className={style.spreadsheet}>
@@ -47,4 +48,4 @@ const Spreadsheet = () => {
   );
 };
 
-export default Spreadsheet;
+export default AddNewSpreadsheetPage;

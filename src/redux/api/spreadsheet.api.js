@@ -21,6 +21,19 @@ export const saveSpreadsheet = (newSpreadsheet) => {
   });
 };
 
+export const saveCellData = (newSpreadsheet) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+    }, DELAY);
+  });
+};
+
+export const saveFinalSpreadsheet = (spreadsheet) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+    }, DELAY);
+  });
+};
 
 export const getSpreadsheetById = (id) => (
   new Promise((resolve) => {

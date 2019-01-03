@@ -1,5 +1,7 @@
 import React from 'react';
-import Table from 'components/DataTable/Table';
+
+import Table from 'components/DataTable/Table/Table';
+
 import style from './EditSpreadsheet.scss';
 
 const EditSpreadsheet = ({ data }) => {

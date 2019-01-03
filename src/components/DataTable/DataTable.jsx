@@ -1,12 +1,13 @@
 import { useContext, useEffect, useState } from 'react';
+
 import {
   applyColumnValidationRules,
   CUSTOM_TYPE,
 } from 'components/DataTable/dataTable.utils';
 import { SpreadsheetDispatch, SpreadsheetState } from 'utils/constants';
 import { getAllColumnTypes } from 'actions/spreadsheet.actions';
-import { CUSTOM_LIST_NAME } from 'components/Form/Form';
 import { INIT_NR_ROWS } from 'components/Spreadsheet/spreadsheet.utils';
+import { CUSTOM_LIST_NAME } from 'components/Form/form.utils';
 
 
 const getInitColumnName = ({ title }) => ({

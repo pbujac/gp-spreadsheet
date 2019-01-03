@@ -1,6 +1,6 @@
 import React from 'react';
 
-import style from './Error.scss';
+import style from './FieldError.scss';
 
 const FieldError = ({ errors, name }) => {
   const isErrorAvailable = errors && errors[name];
