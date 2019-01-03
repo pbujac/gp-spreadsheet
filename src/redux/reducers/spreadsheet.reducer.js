@@ -10,6 +10,14 @@ import {
   GET_SPREADSHEET_BY_ID,
   GET_SPREADSHEET_BY_ID_SUCCESS,
   GET_SPREADSHEET_BY_ID_ERROR,
+
+  SAVE_UPDATED_SPREADSHEET,
+  SAVE_UPDATED_SPREADSHEET_ERROR,
+  SAVE_UPDATED_SPREADSHEET_SUCCESS,
+
+  ADD_NEW_COLUMN_SPREADSHEET,
+  ADD_NEW_COLUMN_SPREADSHEET_SUCCESS,
+  ADD_NEW_COLUMN_SPREADSHEET_ERROR,
 } from 'constants/spreadsheet.constants';
 
 import { createReducer } from './utils';
@@ -66,6 +74,18 @@ const spreadsheetReducer = createReducer(initialState, {
   [GET_SPREADSHEET_BY_ID]: spreadsheetDefaultAction,
   [GET_SPREADSHEET_BY_ID_SUCCESS]: spreadsheetDefaultActionSuccess,
   [GET_SPREADSHEET_BY_ID_ERROR]: spreadsheetDefaultActionError,
+
+  [GET_SPREADSHEET_BY_ID]: spreadsheetDefaultAction,
+  [GET_SPREADSHEET_BY_ID_SUCCESS]: spreadsheetDefaultActionSuccess,
+  [GET_SPREADSHEET_BY_ID_ERROR]: spreadsheetDefaultActionError,
+
+  [SAVE_UPDATED_SPREADSHEET]: spreadsheetDefaultAction,
+  [SAVE_UPDATED_SPREADSHEET_SUCCESS]: spreadsheetDefaultActionSuccess,
+  [SAVE_UPDATED_SPREADSHEET_ERROR]: spreadsheetDefaultActionError,
+
+  [ADD_NEW_COLUMN_SPREADSHEET]: spreadsheetDefaultAction,
+  [ADD_NEW_COLUMN_SPREADSHEET_SUCCESS]: spreadsheetDefaultActionSuccess,
+  [ADD_NEW_COLUMN_SPREADSHEET_ERROR]: spreadsheetDefaultActionError,
 });
 
 export default spreadsheetReducer;

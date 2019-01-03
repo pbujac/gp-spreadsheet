@@ -5,7 +5,11 @@ import {
   CUSTOM_TYPE,
 } from 'components/DataTable/dataTable.utils';
 import { SpreadsheetDispatch, SpreadsheetState } from 'utils/constants';
-import { getAllColumnTypes } from 'actions/spreadsheet.actions';
+import {
+  getAllColumnTypes,
+  saveNewColumnSpreadsheet,
+  saveUpdatedSpreadsheet,
+} from 'actions/spreadsheet.actions';
 import { INIT_NR_ROWS } from 'components/Spreadsheet/spreadsheet.utils';
 import { CUSTOM_LIST_NAME } from 'components/Form/form.utils';
 
@@ -17,7 +21,7 @@ const getInitColumnName = ({ title }) => ({
   [CUSTOM_LIST_NAME]: [],
 });
 
-const useDataTable = ({rows, columns}) => {
+const useDataTable = ({ id, rows, columns }) => {
   const [rowData, setRowData] = useState(rows);
   const [rowLength, setRowLength] = useState(rows.length);
   const [columnLength, setColumnLength] = useState(columns.length);
@@ -44,8 +48,7 @@ const useDataTable = ({rows, columns}) => {
     const currentCellData = rowData[rowNumber].cells[columnNumber];
     currentCellData.value = value;
 
-    /** TODO: SAVE TO DB NEW UPDATED CELLS - CALL REDUX ACTION  - param rowData */
-    // rowData
+    saveUpdatedSpreadsheet(id, rowData, dispatch);
   };
 
   const onValidateField = (value, type, currentCellData) =>
@@ -98,10 +101,16 @@ const useDataTable = ({rows, columns}) => {
     });
 
     /** TODO: SAVE TO DB NEW CELLS - CALL REDUX ACTION */
-    /** TODO: SAVE COLUMN TYPE - CALL REDUX ACTION */
+    /** TODO: EXAMPLE: SAVE COLUMN TYPE - CALL REDUX ACTION */
+    saveNewColumnSpreadsheet(id, {
+      title: formData.title,
+      type: columnType,
+      isRequired: formData.isRequired,
+    }, dispatch);
 
     setColumnLength(prevState => ++prevState);
     setIsNewColumnAdded(false);
+    setRowData(rowData);
   };
 
   return {
