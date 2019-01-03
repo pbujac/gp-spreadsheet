@@ -14,13 +14,6 @@ const Homepage = () => {
           theme="blue"
         />
       </Link>
-      <Link to="/">
-        <Card
-          title="View spreadsheets"
-          description="Click here to view all - Not implemented"
-          theme="black"
-        />
-      </Link>
     </div>
   );
 };
