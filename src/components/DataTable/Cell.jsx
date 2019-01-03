@@ -22,23 +22,18 @@ const Cell = ({rowNumber, columnNumber, cell, isActive, updateTableData}) => {
   const onCellChange = (event) =>
     updateTableData(event.target.value, cell.type, rowNumber, columnNumber);
 
-  const DisplayElement = (
-    <p
-      onClick={onClick}
-      onDoubleClick={onDoubleClick}
-      className={style.row}
-      role="presentation"
-    >
-      {cell.value}
-    </p>
-  );
-
   const uniqueID = uniqueId();
-
-  const checkTypeElement = () => cell[CUSTOM_LIST_NAME] && cell[CUSTOM_LIST_NAME].length > 0
+  const InputTypeElement = cell[CUSTOM_LIST_NAME] && cell[CUSTOM_LIST_NAME].length > 0
     ? (
       <div>
-        <input list={uniqueID}/>
+        here
+        <input
+          type="text"
+          list={uniqueID}
+          onChange={onCellChange}
+          value={cell.value}
+          autoFocus
+        />
 
         <datalist id={uniqueID}>
           {cell[CUSTOM_LIST_NAME].map(option =>
@@ -56,11 +51,21 @@ const Cell = ({rowNumber, columnNumber, cell, isActive, updateTableData}) => {
         autofocus
       />
     );
+  const DisplayElement = (
+    <p
+      onClick={onClick}
+      onDoubleClick={onDoubleClick}
+      className={style.row}
+      role="presentation"
+    >
+      {cell.value}
+    </p>
+  );
 
   const isValidCell = typeof cell.isValid === 'undefined' || cell.isValid === true;
   return (
     <div className={isValidCell ? '' : style.is_not_valid}>
-      {isEditing ? checkTypeElement() : DisplayElement}
+      {isEditing ? InputTypeElement : DisplayElement}
     </div>
   );
 };

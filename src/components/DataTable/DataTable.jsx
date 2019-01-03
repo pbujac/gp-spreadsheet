@@ -27,6 +27,7 @@ const useDataTable = ({ rows, columns  }) => {
 
     currentCellData.value = value;
     currentCellData.isValid = isValid;
+    console.log(currentCellData);
 
     /** TODO: SAVE TO DB NEW UPDATED CELLS - CALL REDUX ACTION */
 
@@ -60,7 +61,7 @@ const useDataTable = ({ rows, columns  }) => {
     const columnType = formData.type;
 
     const listOptions = [];
-    columnType === CUSTOM_TYPE && (listOptions.push(... formData[CUSTOM_LIST_NAME]));
+    columnType === CUSTOM_TYPE && (listOptions.push(...formData[CUSTOM_LIST_NAME]));
 
     rowData.map((data) => {
       data.cells.push({ value: '', type: columnType,  [CUSTOM_LIST_NAME]: listOptions });
