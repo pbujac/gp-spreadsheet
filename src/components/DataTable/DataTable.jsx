@@ -6,6 +6,7 @@ import {
 import { SpreadsheetDispatch, SpreadsheetState } from 'utils/constants';
 import { getAllColumnTypes } from 'actions/spreadsheet.actions';
 import { CUSTOM_LIST_NAME } from 'components/Form/Form';
+import { INIT_NR_ROWS } from 'components/Spreadsheet/spreadsheet.utils';
 
 
 const getInitColumnName = ({ title }) => ({
@@ -32,8 +33,8 @@ const useDataTable = ({rows, columns}) => {
   const setRowWithColumnNames = () => {
     const newRowCells = { cells: [] };
 
-    columns.forEach(() => newRowCells.cells.push(getInitColumnName));
-
+    columns.forEach((col) => newRowCells.cells.push(getInitColumnName(col)));
+    console.log(newRowCells);
     rowData.unshift(newRowCells);
     setRowData(rowData);
   };
@@ -52,21 +53,27 @@ const useDataTable = ({rows, columns}) => {
   };
 
   const addNewRow = () => {
-    const newRowCells = {cells: []};
+    const allRows = [];
+    for (let i = 0; i < INIT_NR_ROWS; i++) {
+      const newRowCells = {cells: []};
 
-    for (let y = 0; y < columnLength; y++) {
-      const columnType = rowData[rowLength - 1].cells[y];
-      newRowCells.cells.push({
-        value: '',
-        type: columnType.type,
-        [CUSTOM_LIST_NAME]: columnType[CUSTOM_LIST_NAME],
-      });
+      for (let y = 0; y < columnLength; y++) {
+        const columnType = rowData[rowLength - 1].cells[y];
+
+        newRowCells.cells.push({
+          value: '',
+          type: columnType.type,
+          [CUSTOM_LIST_NAME]: columnType[CUSTOM_LIST_NAME],
+        });
+      }
+
+      allRows.push(newRowCells);
     }
 
     /** TODO: SAVE TO DB NEW CELLS - CALL REDUX ACTION */
 
-    setRowLength(prevState => ++prevState);
-    setRowData(prevState => [...prevState, newRowCells]);
+    setRowLength(prevState => prevState + INIT_NR_ROWS);
+    setRowData(prevState => [...prevState, ...allRows]);
     setActiveCell({});
   };
 

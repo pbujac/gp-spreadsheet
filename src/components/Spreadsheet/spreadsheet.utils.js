@@ -1,8 +1,7 @@
 import { uniqueId } from 'utils/utils';
 
+export const INIT_NR_ROWS = 10;
 export const defineNewSpreadsheetData = (form) => {
-  const INIT_NR_ROWS = 10;
-
   const rows = Array.from({ length: INIT_NR_ROWS }, () => (
     {
       cells: [
