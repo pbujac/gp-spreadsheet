@@ -1,0 +1,14 @@
+@import '~style/variables';
+
+.edit_spreadsheet_container {
+  margin: 20px;
+}
+
+.edit_spreadsheet_title {
+  font-size: $base-font-size * 1.2;
+  line-height: $base-font-size * 2;
+  font-weight: $base-font-weight-bold;
+  margin: $base-space * 2 auto $base-space;
+  border-bottom: $base-border;
+  margin-bottom: $base-space * 3;
+}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import style from './Cell.scss';
 import Input from 'components/Form/Input';
@@ -6,27 +6,40 @@ import { ENTER_KEY } from 'utils/constants';
 import { CUSTOM_LIST_NAME } from 'components/Form/Form';
 import { uniqueId } from 'utils/utils';
 
-const Cell = ({rowNumber, columnNumber, cell, isActive, updateTableData}) => {
-  const [isEditing, setIsEditing] = useState(isActive);
+const Cell = ({rowNumber, columnNumber, cell, updateTableData, onValidateField }) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [value, setValue] = useState(cell.value);
+  const [isValid, setIsValid] = useState(true);
 
-  const onClick = (e) => {
-  };
+  const onClick = () => {};
   const onDoubleClick = () => setIsEditing(true);
-  const onBlur = () => setIsEditing(false);
+  const onBlur = () => {
+    updateTableData(value, cell.type, rowNumber, columnNumber);
+    setIsEditing(false);
+
+    setIsValid(onValidateField(value, cell.type, cell));
+  };
+
+  useEffect(() => {
+    setIsValid(onValidateField(value, cell.type, cell));
+  }, []);
 
   const onKeyDownInput = (event) => {
     if (event.keyCode === ENTER_KEY) {
       setIsEditing(!isEditing);
     }
   };
-  const onCellChange = (event) =>
-    updateTableData(event.target.value, cell.type, rowNumber, columnNumber);
+
+  const onCellChange = (event) => setValue(event.target.value);
 
   const uniqueID = uniqueId();
+  cell.value = value;
+
   const InputTypeElement = cell[CUSTOM_LIST_NAME] && cell[CUSTOM_LIST_NAME].length > 0
     ? (
-      <div>
+      <>
         <input
+          className={style.input}
           type="text"
           list={uniqueID}
           onChange={onCellChange}
@@ -38,10 +51,11 @@ const Cell = ({rowNumber, columnNumber, cell, isActive, updateTableData}) => {
           {cell[CUSTOM_LIST_NAME].map(option =>
             <option key={uniqueId()} value={option}/>)}
         </datalist>
-      </div>
+      </>
     )
     : (
       <Input
+        className={style.input}
         type="text"
         onBlur={onBlur}
         onKeyDown={onKeyDownInput}
@@ -50,22 +64,34 @@ const Cell = ({rowNumber, columnNumber, cell, isActive, updateTableData}) => {
         autofocus
       />
     );
+
+  const ErrorMessage = (
+    <div className={style.error_container}>
+      <span className={style.error_title}>Error</span>
+      error message can be long
+    </div>
+  );
+
   const DisplayElement = (
     <p
       onClick={onClick}
       onDoubleClick={onDoubleClick}
-      className={style.row}
+      className={style.cell}
       role="presentation"
     >
       {cell.value}
     </p>
   );
 
-  const isValidCell = typeof cell.isValid === 'undefined' || cell.isValid === true;
   return (
-    <div className={isValidCell ? '' : style.is_not_valid}>
-      {isEditing ? InputTypeElement : DisplayElement}
-    </div>
+    <td  className={isValid ? (isEditing ? style.selected : '') : style.is_not_valid}>
+      {
+        !isValid ? ErrorMessage : ''
+      }
+      {
+        isEditing ? InputTypeElement : DisplayElement
+      }
+    </td>
   );
 };
 

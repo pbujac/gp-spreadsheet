@@ -19,7 +19,6 @@ const useDataTable = ({rows, columns}) => {
   const [rowData, setRowData] = useState(rows);
   const [rowLength, setRowLength] = useState(rows.length);
   const [columnLength, setColumnLength] = useState(columns.length);
-  const [activeCell, setActiveCell] = useState({});
   const [isNewColumnAdded, setIsNewColumnAdded] = useState(false);
 
   const spreadsheet = useContext(SpreadsheetState);
@@ -41,19 +40,18 @@ const useDataTable = ({rows, columns}) => {
 
   const updateTableData = (value, type, rowNumber, columnNumber) => {
     const currentCellData = rowData[rowNumber].cells[columnNumber];
-    const isValid = applyColumnValidationRules(value, type, currentCellData);
-
     currentCellData.value = value;
-    currentCellData.isValid = isValid;
 
-    /** TODO: SAVE TO DB NEW UPDATED CELLS - CALL REDUX ACTION */
-
-    setRowData(rowData);
-    setActiveCell({rowNumber, columnNumber});
+    /** TODO: SAVE TO DB NEW UPDATED CELLS - CALL REDUX ACTION  - param rowData */
+    // rowData
   };
+
+  const onValidateField = (value, type, currentCellData) =>
+    applyColumnValidationRules(value, type, currentCellData);
 
   const addNewRow = () => {
     const allRows = [];
+
     for (let i = 0; i < INIT_NR_ROWS; i++) {
       const newRowCells = { cells: [] };
 
@@ -74,7 +72,6 @@ const useDataTable = ({rows, columns}) => {
 
     setRowLength(prevState => prevState + INIT_NR_ROWS);
     setRowData(prevState => [...prevState, ...allRows]);
-    setActiveCell({});
   };
 
   const addNewColumn = () => setIsNewColumnAdded(true);
@@ -99,18 +96,17 @@ const useDataTable = ({rows, columns}) => {
     /** TODO: SAVE COLUMN TYPE - CALL REDUX ACTION */
 
     setColumnLength(prevState => ++prevState);
-    setActiveCell({});
     setIsNewColumnAdded(false);
   };
 
   return {
     rowData,
-    activeCell,
     isNewColumnAdded,
     updateTableData,
     addNewRow,
     addNewColumn,
     saveNewColumn,
+    onValidateField,
     columnsData: spreadsheet.columns,
   };
 };

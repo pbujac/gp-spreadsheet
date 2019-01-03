@@ -1,10 +1,11 @@
 import React from 'react';
+import style from './Loading.scss';
 
 const Loading = props => {
   if (props.error) {
     return <div>Error!</div>;
   } else {
-    return <div>Loadifdng.dddds..f</div>;
+    return <div className={style.loading}>Loading...</div>;
   }
 };
 

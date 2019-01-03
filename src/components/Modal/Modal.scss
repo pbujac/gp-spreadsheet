@@ -18,18 +18,18 @@
   top: 0;
   overflow: auto;
   margin: 0 auto;
-  z-index: 1;
+  z-index: 3;
   color: $black;
   background-color: $black-transparent;
 
   .content {
     font-size: medium;
     opacity: 1;
-    padding: $base-space * 2;
+    padding: $base-space * 3;
     margin: 10% auto 0;
-    width: 50%;
+    width: 60%;
     background-color: $white;
-    border-radius: $base-border-radius * 4;
+    border-radius: $base-border-radius * 2;
     animation-name: modalFade;
     animation-duration: 0.3s;
   }
@@ -47,6 +47,6 @@
   }
 
   .children {
-    padding: $base-space;
+    padding: $base-space * 2 0;
   }
 }

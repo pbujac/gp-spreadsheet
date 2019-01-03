@@ -10,14 +10,14 @@ const Homepage = () => {
       <Link to="/create-spreadsheet">
         <Card
           title="Create spreadsheet"
-          description="lorem ipsum dolores"
+          description="Click here to create a new one"
           theme="blue"
         />
       </Link>
       <Link to="/view-spreadsheets">
         <Card
           title="View spreadsheets"
-          description="lorem psum dollorem"
+          description="Click here to view all"
           theme="black"
         />
       </Link>

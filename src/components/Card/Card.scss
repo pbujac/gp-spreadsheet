@@ -3,7 +3,7 @@
 .card {
   text-align: center;
   padding: $base-space * 10 $base-space * 4;
-  border-radius: $base-border-radius * 8;
+  border-radius: $base-border-radius * 6;
   box-shadow: $base-shadow;
   height: inherit;
 
@@ -17,7 +17,7 @@
 }
 
 .black {
-  background: $black;
+  background: $black-transparent;
   color: $white;
 }
 

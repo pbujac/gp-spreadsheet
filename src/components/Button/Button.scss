@@ -26,3 +26,32 @@ $btn-padding: $base-space $base-space * 2;
 
   width: 100%;
 }
+
+.narrow {
+  @extend .secondary;
+
+  padding: 0 15px;
+  height: 30px;
+}
+
+.add_rows,
+.add_column {
+  @extend .narrow;
+
+  &:before {
+    content: '+';
+    padding-right: $base-space;
+  }
+}
+
+.add_column {
+  position: absolute;
+  right: 0;
+  left: 100%;
+  margin: 0 $base-space;
+}
+
+.add_rows {
+  margin: $base-space 0;
+}
+

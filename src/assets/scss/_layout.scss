@@ -1,3 +1,5 @@
+@import '~style/variables';
+
 html {
   box-sizing: border-box;
 }
@@ -15,4 +17,33 @@ body {
 
 body {
   margin: 0;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+td, th {
+  border: 1px solid $border-grey;
+}
+
+th,
+tr:first-of-type > td {
+  padding: 5px 10px;
+  background-color: $light-grey;
+  font-size: $base-font-size * 0.8;
+  font-weight: $base-font-weight * 2;
+  color: $grey;
+}
+
+tr:first-of-type > td {
+  padding: 0;
+}
+
+tr:first-of-type > td p {
+  text-align: center;
+}
+
+td {
+  max-width: $base-space * 12.5;
 }

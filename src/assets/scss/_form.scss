@@ -1,19 +1,29 @@
 %input {
   border: $base-border;
+  border-color: $medium-grey;
   border-radius: $base-border-radius;
   width: 100%;
   font-size: $base-font-size;
   height: $base-space * 5;
   margin-bottom: $base-space;
+  font-family: $base-font-family;
+  padding: 10px;
 }
 
 select {
   @extend %input;
+  background-color: transparent;
+  color: $black;
 }
 
 input {
   @extend %input;
-  padding: 10px;
+
+  &[type="checkbox"] {
+    padding: 0;
+    height: $base-space * 1.5;
+    width: auto;
+  }
 }
 
 fieldset {
@@ -33,4 +43,5 @@ label {
   font-weight: 600;
   margin-bottom: $base-space;
   text-transform: uppercase;
+  font-size: $base-font-size * 0.85;
 }

@@ -14,6 +14,7 @@ const Input = ({
   onKeyDown,
   errors,
   autofocus,
+  className,
 }) => {
   return (
     <>
@@ -24,6 +25,7 @@ const Input = ({
       }
 
       <input
+        className={className}
         name={name}
         type={type}
         value={value}

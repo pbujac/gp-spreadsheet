@@ -5,38 +5,41 @@ import useDataTable from 'components/DataTable/DataTable';
 import { uniqueId } from 'utils/utils';
 import Modal from 'components/Modal/Modal';
 import AddColumnForm from 'components/Spreadsheet/AddColumnForm';
+import Button from 'components/Button/Button';
+
+import style from './Table.scss';
 
 const Table = ({ data }) => {
   const {
     rowData,
-    activeCell,
     isNewColumnAdded,
     updateTableData,
     addNewRow,
     addNewColumn,
     saveNewColumn,
+    onValidateField,
     columnsData,
   } = useDataTable(data);
 
 
   const TableData = rowData.map((row, xIndex) => (
     <tr key={uniqueId()}>
-      {xIndex > 0 ? <td>{xIndex}</td> : <td /> }
+      {xIndex > 0 ? <th>{xIndex}</th> : <th /> }
       <Row
         rowNumber={xIndex}
         cells={row.cells}
-        activeCell={activeCell}
         updateTableData={updateTableData}
+        onValidateField={onValidateField}
       />
     </tr>
   ));
 
   return (
-    <div>
+    <div className={style.table_container}>
       <Modal
         showModal={isNewColumnAdded}
         title="Add new column"
-        subtitle="Add new data for column"
+        subtitle="Complete the form with new data for column"
         onCloseModal={saveNewColumn}
       >
         <AddColumnForm
@@ -44,11 +47,15 @@ const Table = ({ data }) => {
           onSaveNewColumn={saveNewColumn}
         />
       </Modal>
-      <button onClick={addNewColumn}>Add column</button>
+      <Button theme="add_column" onClick={addNewColumn}>
+        Add column
+      </Button>
       <table>
         <tbody>{TableData}</tbody>
       </table>
-      <button onClick={addNewRow}>Add row</button>
+      <Button theme="add_rows" onClick={addNewRow}>
+        Add 10 rows
+      </Button>
     </div>
   );
 };
