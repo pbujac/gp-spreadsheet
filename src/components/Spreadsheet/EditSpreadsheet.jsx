@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import DataTable from 'components/DataTable/DataTable';
+import React from 'react';
+import Table from 'components/DataTable/Table';
 
 
 const EditSpreadsheet = ({ data }) => {
@@ -8,11 +8,7 @@ const EditSpreadsheet = ({ data }) => {
         Panel
       {data.name}
 
-      <DataTable
-        columnsLength={data.columns.length}
-        rowLength={data.rows.length}
-        rowData={data.rows}
-      />
+      <Table data={data} />
     </div>
   );
 };

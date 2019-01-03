@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Redirect } from 'react-router-dom';
 
 import { SpreadsheetDispatch, SpreadsheetState } from 'utils/constants';
+import { defineNewSpreadsheetData } from 'components/Spreadsheet/spreadsheet.utils';
 
 import Card from 'components/Card/Card';
 import AddColumnForm from 'components/Spreadsheet/AddColumnForm';
@@ -8,7 +10,7 @@ import AddColumnForm from 'components/Spreadsheet/AddColumnForm';
 import { getAllColumnTypes, saveNewSpreadsheet } from 'actions/spreadsheet.actions';
 
 import style from './Spreadsheet.scss';
-import { Redirect } from 'react-router-dom';
+
 
 const Spreadsheet = () => {
   const spreadsheet = useContext(SpreadsheetState);
@@ -21,7 +23,8 @@ const Spreadsheet = () => {
   }, []);
 
   const onSaveNewSpreadsheet = (form) => {
-    saveNewSpreadsheet(form, dispatch).then(() => setIsRedirect(true));
+    const newSpreadsheet = defineNewSpreadsheetData(form);
+    saveNewSpreadsheet(newSpreadsheet, dispatch).then(() => setIsRedirect(true));
   };
   const { columns, data } = spreadsheet || [];
 
@@ -29,8 +32,8 @@ const Spreadsheet = () => {
     const pathname = '/edit-spreadsheet';
     return <Redirect to={{
       pathname,
-      state: { id : data.id },
-    }}  />;
+      state: { id: data.id },
+    }} />;
   }
   return (
     <div className={style.spreadsheet}>

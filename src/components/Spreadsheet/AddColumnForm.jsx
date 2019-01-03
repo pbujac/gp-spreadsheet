@@ -44,6 +44,7 @@ const AddColumnForm = ({ columns, onSaveNewSpreadsheet }) => {
         placeholder="Select your type"
         options={columns}
         value={form.type}
+        optionValueName="type"
         errors={errors}
         onChange={onChange}
       />

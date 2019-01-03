@@ -10,7 +10,7 @@ const Input = ({
   onChange,
   onBlur,
   onFocus,
-  onKeyPress,
+  onKeyDown,
   errors,
   autofocus,
 }) => {
@@ -30,7 +30,7 @@ const Input = ({
         onChange={onChange}
         onBlur={onBlur}
         onFocus={onFocus}
-        onKeyPress={onKeyPress}
+        onKeyDown={onKeyDown}
         autoFocus={autofocus}
       />
 

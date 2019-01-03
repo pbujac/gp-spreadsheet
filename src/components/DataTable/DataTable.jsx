@@ -1,72 +1,57 @@
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { applyColumnValidationRules } from 'components/DataTable/dataTable.utils';
 
-import Row from 'components/DataTable/Row';
-import { uniqueId } from 'utils/utils';
-import Cell from 'components/DataTable/Cell';
+const findColumnType = (columns, columnNumber) => columns.find(col => col.index === columnNumber);
 
-const DataTable = ({ rowLength, columnsLength, rowData }) => {
-  const [currentRowData, setRowData] = useState(rowData);
-  const [row, setRow] = useState(rowLength);
-  const [column, setColumn] = useState(columnsLength);
-  const [rows, setRows] = useState([]);
+const useDataTable = ({ rows, columns  }) => {
+  const [rowData, setRowData] = useState(rows);
+  const [rowLength, setRowLength] = useState(rows.length);
+  const [columnLength, setColumnLength] = useState(columns.length);
+  const [activeCell, setActiveCell] = useState({});
 
-  const updateData = (rowNumber, columnNumber, value) => {
-    currentRowData[rowNumber].cells[columnNumber].value = value;
-    setRowData(currentRowData);
+  const updateTableData = (value, type, rowNumber, columnNumber) => {
+    const isValid = applyColumnValidationRules(value, type);
+    const currentCellData = rowData[rowNumber].cells[columnNumber];
+
+    currentCellData.value = value;
+    currentCellData.isValid = isValid;
+
+    setRowData(rowData);
+    setActiveCell({ rowNumber, columnNumber });
   };
 
-  useEffect(() => {
-    const table = [];
+  const addNewRow = () => {
+    const newRowCells = { index: rowLength + 1, cells: [] };
 
-    for (let x = 0; x < row; x++) {
-      for (let y = 0; y < column; y++) {
-        table.push(
-          <Cell
-            key={uniqueId()}
-            rowNumber={x}
-            columnNumber={y}
-            cell={rowData[x].cells[y]}
-            onChange={updateData}
-          />
-        );
-      }
+    for (let y = 0; y < columnLength; y++) {
+      const columnType = findColumnType(columns, y);
 
-      setRows(table);
+      newRowCells.cells.push({ index: y, value: '', type: columnType.type});
     }
-  }, []);
 
-  const addRow = () => {
-    const newTable = rows;
-    setRow(prevState => ++prevState);
-
-    for (let x = row; x < row + 1; x++) {
-      console.log(rowData[x]);
-      rowData[x].props.cells.push({
-        value: 'test',
-      });
-
-      for (let y = 0; y < column; y++) {
-        newTable.push(
-          <Cell
-            key={uniqueId()}
-            rowNumber={x}
-            columnNumber={y}
-            cell={rowData[x].cells[y]}
-            onChange={updateData}
-          />
-        );
-      }
-
-      setRows(newTable);
-    }
+    setRowLength(prevState => ++prevState);
+    setRowData(prevState => [...prevState, newRowCells]);
+    setActiveCell({});
   };
 
-  return (
-    <div>
-      {rows}
-      <button onClick={addRow}>Add row</button>
-    </div>
-  );
+  const addNewColumn = () => {
+    /** TODO: ADD MODAL WITH TYPE DEFINITION - TO CHANGE*/
+    const columnType = findColumnType(columns, 0);
+    rowData.map((data, index) => {
+      data.cells.push({ index: index, value: '', type: columnType.type });
+    });
+
+    setColumnLength(prevState => ++prevState);
+    setActiveCell({});
+  };
+
+  return {
+    rowData,
+    activeCell,
+    updateTableData,
+    addNewRow,
+    addNewColumn,
+  };
 };
 
-export default DataTable;
+export default useDataTable;
