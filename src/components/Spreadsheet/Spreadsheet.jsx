@@ -41,7 +41,7 @@ const Spreadsheet = () => {
         title="Add new column"
         customStyle={style.card}
       >
-        <AddColumnForm columns={columns} onSaveNewSpreadsheet={onSaveNewSpreadsheet} />
+        <AddColumnForm columns={columns} onSaveNewColumn={onSaveNewSpreadsheet} />
       </Card>
     </div>
   );

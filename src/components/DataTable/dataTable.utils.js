@@ -1,7 +1,7 @@
 const DATE_TYPE = 'date';
 const STRING_TYPE = 'string';
 const NUMBER_TYPE = 'number';
-const CUSTOM_TYPE = 'custom';
+export const CUSTOM_TYPE = 'custom';
 
 const validateDateCell = (value) => {};
 const validateStringCell = (value) => typeof value === 'string' || value instanceof String;

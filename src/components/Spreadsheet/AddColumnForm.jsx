@@ -2,31 +2,54 @@ import React from 'react';
 
 import Input from 'components/Form/Input';
 import Button from 'components/Button/Button';
-import useForm from 'components/Form/Form';
+import useForm, { CUSTOM_LIST_NAME } from 'components/Form/Form';
 import Select from 'components/Form/Select';
 
 import { validateTitle } from '../../utils/validations/validationRules';
 
 import style from './AddColumnForm.scss';
+import { validateCustomList } from 'utils/validations/validationRules';
 
-const initialState = { title: '' };
-const validationRules = ({ title }) => ({
+const initialState = {title: ''};
+const validationRules = ({title, [CUSTOM_LIST_NAME]: customValue}) => ({
   title: validateTitle(title),
+  [CUSTOM_LIST_NAME]: validateCustomList(customValue),
 });
 
-const AddColumnForm = ({ columns, onSaveNewSpreadsheet }) => {
+const AddColumnForm = ({columns, onSaveNewColumn}) => {
 
-  const { form, errors, onChange } = useForm({
+  const {form, errors, onChange} = useForm({
     initialState,
     validation: validationRules,
   });
 
   const onFormSubmit = (event) => {
     event.preventDefault();
-    onSaveNewSpreadsheet(form);
+
+    if (form[CUSTOM_LIST_NAME]) {
+      form[CUSTOM_LIST_NAME] = form[CUSTOM_LIST_NAME].split(',').map(item => item && item.trim());
+    }
+
+    onSaveNewColumn(form);
   };
 
-  const hasErrors = errors && errors.title;
+  const hasErrors = errors && (errors.title || errors[CUSTOM_LIST_NAME]);
+  const CustomSelectType = typeof form[CUSTOM_LIST_NAME] !== 'undefined' && (
+    <div>
+      {
+        <Input
+          id={CUSTOM_LIST_NAME}
+          name={CUSTOM_LIST_NAME}
+          type="text"
+          placeholder="Insert your list item separated by comma ,"
+          value={form[CUSTOM_LIST_NAME]}
+          errors={errors}
+          onChange={onChange}
+        />
+      }
+    </div>
+  );
+
   return (
     <form onSubmit={onFormSubmit}>
       <Input
@@ -38,6 +61,7 @@ const AddColumnForm = ({ columns, onSaveNewSpreadsheet }) => {
         errors={errors}
         onChange={onChange}
       />
+
       <Select
         id="type"
         name="type"
@@ -45,11 +69,19 @@ const AddColumnForm = ({ columns, onSaveNewSpreadsheet }) => {
         options={columns}
         value={form.type}
         optionValueName="type"
+        optionFieldName="name"
         errors={errors}
         onChange={onChange}
       />
 
-      <Button customStyle={style.submit} type="submit" theme="secondary_full" disabled={hasErrors}>Submit</Button>
+      {CustomSelectType}
+
+      <Button
+        customStyle={style.submit}
+        type="submit" theme="secondary_full"
+        disabled={hasErrors}>
+        Submit
+      </Button>
     </form>
   );
 };
