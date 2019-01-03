@@ -8,13 +8,17 @@ import { uniqueId } from 'utils/utils';
 
 import style from './Cell.scss';
 
+const isRequired = (cell) => (cell.isRequired && !!cell.value || !!cell.name) || !cell.isRequired;
+
 const Cell = ({rowNumber, columnNumber, cell, updateTableData, onValidateField }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [value, setValue] = useState(cell.value);
   const [isValid, setIsValid] = useState(true);
+  const [isValidRequired, setIsValidRequired] = useState(true);
 
   useEffect(() => {
     setIsValid(onValidateField(value, cell.type, cell));
+    setIsValidRequired(isRequired(cell));
   }, []);
 
   const onDoubleClick = () => setIsEditing(true);
@@ -22,6 +26,7 @@ const Cell = ({rowNumber, columnNumber, cell, updateTableData, onValidateField }
     updateTableData(value, cell.type, rowNumber, columnNumber);
     setIsEditing(false);
 
+    setIsValidRequired(isRequired(cell));
     setIsValid(onValidateField(value, cell.type, cell));
   };
 
@@ -44,6 +49,7 @@ const Cell = ({rowNumber, columnNumber, cell, updateTableData, onValidateField }
           type="text"
           list={uniqueID}
           onChange={onCellChange}
+          onBlur={onBlur}
           value={cell.value}
           autoFocus
         />
@@ -84,9 +90,9 @@ const Cell = ({rowNumber, columnNumber, cell, updateTableData, onValidateField }
   );
 
   return (
-    <td  className={isValid ? (isEditing ? style.selected : '') : style.is_not_valid}>
+    <td  className={isValid && isValidRequired ? (isEditing ? style.selected : '') : style.is_not_valid}>
       {
-        !isValid ? ErrorMessage : ''
+        !isValid || !isValidRequired ? ErrorMessage : ''
       }
       {
         isEditing ? InputTypeElement : DisplayElement

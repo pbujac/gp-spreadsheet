@@ -13,6 +13,7 @@ import { CUSTOM_LIST_NAME } from 'components/Form/form.utils';
 const getInitColumnName = ({ title }) => ({
   name: title,
   value: title,
+  isRequired: true,
   [CUSTOM_LIST_NAME]: [],
 });
 
@@ -62,6 +63,7 @@ const useDataTable = ({rows, columns}) => {
         newRowCells.cells.push({
           value: '',
           type: columnType.type,
+          isRequired: columnType.isRequired,
           [CUSTOM_LIST_NAME]: columnType[CUSTOM_LIST_NAME],
         });
       }
@@ -83,6 +85,7 @@ const useDataTable = ({rows, columns}) => {
     const listOptions = [];
     const columnName = getInitColumnName(formData);
 
+    console.log(formData);
     columnType === CUSTOM_TYPE && (listOptions.push(...formData[CUSTOM_LIST_NAME]));
     rowData.map((data, index) => {
       index === 0
@@ -90,6 +93,7 @@ const useDataTable = ({rows, columns}) => {
         : data.cells.push({
           value: '',
           type: columnType,
+          isRequired: formData.isRequired,
           [CUSTOM_LIST_NAME]: listOptions,
         });
     });
