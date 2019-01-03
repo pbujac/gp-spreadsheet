@@ -12,8 +12,8 @@ const validateDateCell = (value) => {
   return dateRegex.test(value);
 };
 
-const validateStringCell = (value, cell) => typeof value === 'string' || value instanceof String;
-const validateNumberCell = (value, cell) => (/^(-?\d+\.\d+)$|^(-?\d+)$/).test(value);
+const validateStringCell = (value) => typeof value === 'string' || value instanceof String;
+const validateNumberCell = (value) => (/^(-?\d+\.\d+)$|^(-?\d+)$/).test(value);
 const validateCustomCell = (value, cell) => cell && cell[CUSTOM_LIST_NAME].includes(value);
 
 const getValidationRule = (value, type, currentCellData) => {
