@@ -9,6 +9,9 @@ Simulation application
 * [Sass](http://sass-lang.com) - CSS Style preprocessor
 * [Webpack](https://webpack.js.org) - Module bundler 
 
+## Production link - Preview
+* https://gov-predict-task.netlify.com/
+
 ## Run project
 
 Make sure you have installed
