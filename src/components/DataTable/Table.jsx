@@ -15,12 +15,12 @@ const Table = ({ data }) => {
     isNewColumnAdded,
     updateTableData,
     addNewRow,
-    addNewColumn,
+    setNewColumnActive,
+    setNewColumnInactive,
     saveNewColumn,
     onValidateField,
     columnsData,
   } = useDataTable(data);
-
 
   const TableData = rowData.map((row, xIndex) => (
     <tr key={uniqueId()}>
@@ -40,14 +40,14 @@ const Table = ({ data }) => {
         showModal={isNewColumnAdded}
         title="Add new column"
         subtitle="Complete the form with new data for column"
-        onCloseModal={saveNewColumn}
+        onCloseModal={setNewColumnInactive}
       >
         <AddColumnForm
           columns={columnsData}
           onSaveNewColumn={saveNewColumn}
         />
       </Modal>
-      <Button theme="add_column" onClick={addNewColumn}>
+      <Button theme="add_column" onClick={setNewColumnActive}>
         Add column
       </Button>
       <table>

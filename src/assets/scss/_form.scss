@@ -19,7 +19,7 @@ select {
 input {
   @extend %input;
 
-  &[type="checkbox"] {
+  &[type='checkbox'] {
     padding: 0;
     height: $base-space * 1.5;
     width: auto;

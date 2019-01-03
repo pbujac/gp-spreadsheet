@@ -74,7 +74,8 @@ const useDataTable = ({rows, columns}) => {
     setRowData(prevState => [...prevState, ...allRows]);
   };
 
-  const addNewColumn = () => setIsNewColumnAdded(true);
+  const setNewColumnActive = () => setIsNewColumnAdded(true);
+  const setNewColumnInactive = () => setIsNewColumnAdded(false);
 
   const saveNewColumn = (formData) => {
     const columnType = formData.type;
@@ -104,7 +105,8 @@ const useDataTable = ({rows, columns}) => {
     isNewColumnAdded,
     updateTableData,
     addNewRow,
-    addNewColumn,
+    setNewColumnActive,
+    setNewColumnInactive,
     saveNewColumn,
     onValidateField,
     columnsData: spreadsheet.columns,
