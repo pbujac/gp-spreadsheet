@@ -85,7 +85,6 @@ const useDataTable = ({rows, columns}) => {
     const listOptions = [];
     const columnName = getInitColumnName(formData);
 
-    console.log(formData);
     columnType === CUSTOM_TYPE && (listOptions.push(...formData[CUSTOM_LIST_NAME]));
     rowData.map((data, index) => {
       index === 0
