@@ -21,6 +21,7 @@ const Table = ({ data }) => {
 
   const TableData = rowData.map((row, xIndex) => (
     <tr key={uniqueId()}>
+      <td>{xIndex + 1}</td>
       <Row
         rowNumber={xIndex}
         cells={row.cells}

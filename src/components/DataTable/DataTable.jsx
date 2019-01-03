@@ -7,7 +7,14 @@ import { SpreadsheetDispatch, SpreadsheetState } from 'utils/constants';
 import { getAllColumnTypes } from 'actions/spreadsheet.actions';
 import { CUSTOM_LIST_NAME } from 'components/Form/Form';
 
-const useDataTable = ({ rows, columns  }) => {
+
+const getInitColumnName = ({ title }) => ({
+  name: title,
+  value: title,
+  [CUSTOM_LIST_NAME]: [],
+});
+
+const useDataTable = ({rows, columns}) => {
   const [rowData, setRowData] = useState(rows);
   const [rowLength, setRowLength] = useState(rows.length);
   const [columnLength, setColumnLength] = useState(columns.length);
@@ -19,7 +26,17 @@ const useDataTable = ({ rows, columns  }) => {
 
   useEffect(() => {
     getAllColumnTypes(dispatch);
+    setRowWithColumnNames();
   }, []);
+
+  const setRowWithColumnNames = () => {
+    const newRowCells = { cells: [] };
+
+    columns.forEach(() => newRowCells.cells.push(getInitColumnName));
+
+    rowData.unshift(newRowCells);
+    setRowData(rowData);
+  };
 
   const updateTableData = (value, type, rowNumber, columnNumber) => {
     const isValid = applyColumnValidationRules(value, type);
@@ -27,21 +44,19 @@ const useDataTable = ({ rows, columns  }) => {
 
     currentCellData.value = value;
     currentCellData.isValid = isValid;
-    console.log(currentCellData);
 
     /** TODO: SAVE TO DB NEW UPDATED CELLS - CALL REDUX ACTION */
 
     setRowData(rowData);
-    setActiveCell({ rowNumber, columnNumber });
+    setActiveCell({rowNumber, columnNumber});
   };
 
   const addNewRow = () => {
-    const newRowCells = { cells: [] };
+    const newRowCells = {cells: []};
 
     for (let y = 0; y < columnLength; y++) {
       const columnType = rowData[rowLength - 1].cells[y];
       newRowCells.cells.push({
-        index: y,
         value: '',
         type: columnType.type,
         [CUSTOM_LIST_NAME]: columnType[CUSTOM_LIST_NAME],
@@ -59,12 +74,18 @@ const useDataTable = ({ rows, columns  }) => {
 
   const saveNewColumn = (formData) => {
     const columnType = formData.type;
-
     const listOptions = [];
-    columnType === CUSTOM_TYPE && (listOptions.push(...formData[CUSTOM_LIST_NAME]));
+    const columnName = getInitColumnName(formData);
 
-    rowData.map((data) => {
-      data.cells.push({ value: '', type: columnType,  [CUSTOM_LIST_NAME]: listOptions });
+    columnType === CUSTOM_TYPE && (listOptions.push(...formData[CUSTOM_LIST_NAME]));
+    rowData.map((data, index) => {
+      index === 0
+        ? data.cells.push(columnName)
+        : data.cells.push({
+          value: '',
+          type: columnType,
+          [CUSTOM_LIST_NAME]: listOptions,
+        });
     });
 
     /** TODO: SAVE TO DB NEW CELLS - CALL REDUX ACTION */

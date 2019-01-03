@@ -26,7 +26,6 @@ const Cell = ({rowNumber, columnNumber, cell, isActive, updateTableData}) => {
   const InputTypeElement = cell[CUSTOM_LIST_NAME] && cell[CUSTOM_LIST_NAME].length > 0
     ? (
       <div>
-        here
         <input
           type="text"
           list={uniqueID}
