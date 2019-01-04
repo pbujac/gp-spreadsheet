@@ -17,8 +17,7 @@ Simulation application
 Make sure you have installed
 
 * NodeJS >= 8.10
-* NPM
-* Yarn - optional
+* Yarn v1.9.4
 
 ### Dev Mode
 Open project and run in terminal:
@@ -26,11 +25,6 @@ Open project and run in terminal:
 - Default PORT used - 9000;
 - Access website on http://localhost:9000
 - Install command:
-```
-npm install
-npm run start
-```
-or
 
 ```
 yarn install
@@ -50,11 +44,6 @@ devConfig: {
 ### Prod Mode
 Open project and run in terminal:
 
-```
-npm install
-npm run build
-```
-or
 ```
 yarn install
 yarn build
